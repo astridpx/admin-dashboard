@@ -1,0 +1,45 @@
+import { IconType } from "react-icons";
+
+export interface ILogin {
+  email: string;
+  password: string;
+  role: string;
+}
+
+// ? @ desc sidebar main
+export interface ISidebar {
+  key: number;
+  title: string;
+  items: ISidebarItems[];
+}
+// ? @desc sidebar nested Data
+export interface ISidebarItems {
+  id: number;
+  icon: IconType;
+  name: string;
+  path: string;
+}
+
+export interface ISidebarState {
+  isExpand: boolean;
+  toggleSidebar: (boolean) => void;
+  expand: () => void;
+}
+
+// ? REACT TABLE INTERFACE PROPS
+export type IUser = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  gender: string;
+  address: string;
+};
+
+export interface IProducts {
+  id: number;
+  prod_name: string;
+  stock: any;
+  prod_import: string;
+  prod_code: string;
+}
