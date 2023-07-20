@@ -8,7 +8,7 @@ export default function PageWrapper({
 }) {
   return (
     <>
-      <main className="h-screen  min-h-screen w-full overflow-hiddens flex">
+      <main className="h-screen  min-h-screen w-full overflow-hidden flex">
         <Sidebar />
         <section className="h-full w-full   overflow-y-auto ">
           <Navbar />
