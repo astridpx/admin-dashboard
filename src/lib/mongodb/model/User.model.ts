@@ -18,9 +18,14 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
+    gender: String,
+    address: String,
     raw_password: String,
     hashed_password: String,
-    role: String,
+    role: {
+      type: String,
+      default: "admin",
+    },
   },
   {
     timestamps: true,
