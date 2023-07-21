@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { IoMdNotificationsOutline, IoIosArrowDown } from "react-icons/io";
+import { BiMoon, BiSun } from "react-icons/bi";
 import { Toggle } from "@/components/ui/toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -25,6 +27,7 @@ const tags = Array.from({ length: 50 }).map(
 
 export default function Navbar() {
   const { toggleSidebar, isExpand } = useSidebarStore();
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   return (
     <>
@@ -39,6 +42,22 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center space-x-4">
+          <Badge variant="secondary" className="rounded-3xl">
+            {darkMode ? (
+              <BiSun
+                size={23}
+                className="text-gray-500 cursor-pointer"
+                onClick={() => setDarkMode(!darkMode)}
+              />
+            ) : (
+              <BiMoon
+                size={23}
+                className="text-gray-500 cursor-pointer"
+                onClick={() => setDarkMode(!darkMode)}
+              />
+            )}
+          </Badge>
+
           <div>
             <DropdownMenu>
               <DropdownMenuTrigger className="focus:outline-0 focus:outline-none">
