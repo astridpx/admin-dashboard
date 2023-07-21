@@ -28,7 +28,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="h-[10vh] w-full px-4 bg-white flex justify-between sticky top-0 border-b border-gray-200 ">
+      <nav className="h-[10vh] w-full px-4 bg-white flex justify-between z-10 sticky top-0 border-b border-gray-200 ">
         <div className="flex items-center">
           <Toggle onClick={() => toggleSidebar(!isExpand)}>
             <HiOutlineMenuAlt2
