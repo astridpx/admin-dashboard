@@ -37,6 +37,7 @@ export default function Sidebar() {
               return (
                 <>
                   <h1
+                    key={items.key}
                     className={`text-base text-gray-500 ml-3 my-2  ${
                       !isExpand && "hidden"
                     }`}
@@ -49,7 +50,7 @@ export default function Sidebar() {
                     return (
                       <>
                         <Link
-                          key={list.path}
+                          key={list.id}
                           href={list.path}
                           className="flex items-center px-3 py-3 cursor-pointer rounded hover:bg-slate-200"
                         >
