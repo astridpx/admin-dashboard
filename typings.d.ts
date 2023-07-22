@@ -22,13 +22,13 @@ export interface ISidebarItems {
 
 export interface ISidebarState {
   isExpand: boolean;
-  toggleSidebar: (boolean) => void;
+  toggleSidebar: (state: boolean) => void;
   expand: () => void;
 }
 
 // ? REACT TABLE INTERFACE PROPS
 export type IUser = {
-  id: number;
+  _id?: string;
   first_name: string;
   last_name: string;
   email: string;
@@ -36,10 +36,24 @@ export type IUser = {
   address: string;
 };
 
+export interface INewUser {
+  first_name: string;
+  last_name: string;
+  email: string;
+  gender: string;
+  address: string;
+  password: string;
+}
+
 export interface IProducts {
   id: number;
   prod_name: string;
   stock: any;
   prod_import: string;
   prod_code: string;
+}
+
+export interface IUserFormState {
+  showAddUserForm: boolean;
+  toggleShowUserForm: (state: boolean) => void;
 }
