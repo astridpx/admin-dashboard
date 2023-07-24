@@ -4,12 +4,16 @@
 
 "use client";
 
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -40,16 +44,30 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   // ? USING REACT TABLEHOOK
+  const [tableFilter, setTableFilter] = useState<string>("");
   const table = useReactTable({
     data,
     columns,
+    state: {
+      globalFilter: tableFilter,
+    },
+    onGlobalFilterChange: setTableFilter,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
   return (
     <>
       <div className="rounded-md border">
+        <div className="p-4  border-b ">
+          <Input
+            placeholder="Search..."
+            value={tableFilter}
+            onChange={(e) => setTableFilter(e.target.value)}
+            className="h-8 w-[150px] lg:w-[250px]"
+          />
+        </div>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

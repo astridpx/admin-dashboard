@@ -57,3 +57,19 @@ export interface IUserFormState {
   showAddUserForm: boolean;
   toggleShowUserForm: (state: boolean) => void;
 }
+export interface IUserEdit {
+  first_name: string;
+  last_name: string;
+  email: string;
+  gender: string;
+  address: string;
+}
+export interface IUserEditState {
+  userEditData: IUserEdit;
+  showEditUserModal: boolean;
+  editUserId: any;
+
+  setEditData: (state: IUserEdit) => void;
+  setShowEditModal: (state: boolean) => void;
+  setEditUserId: (state: any) => void;
+}

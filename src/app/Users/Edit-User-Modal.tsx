@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "react-query";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,70 +14,73 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import addUserModalStore from "@/lib/zustand/UserPage-store/AddNew-Modal-store";
-import { addNewUser } from "./APIs/api";
+import editUserStore from "@/lib/zustand/UserPage-store/Edit-User-Data-Store";
+import { UpdateUser } from "./APIs/api";
 
-export default function AddNewUser() {
+export default function EditUserModal() {
   const queryClient = useQueryClient();
-  const { toggleShowUserForm, showAddUserForm } = addUserModalStore();
-  const [userData, setData] = useState({
+  const { userEditData, showEditUserModal, setShowEditModal, editUserId } =
+    editUserStore();
+  const [userData, setUserData] = useState({
     first_name: "",
     last_name: "",
     email: "",
     gender: "",
     address: "",
-    password: "",
   });
 
-  const userMutation: any = useMutation({
-    mutationFn: addNewUser,
-    onSuccess: (data) => {
-      toast.success(data?.message);
+  useEffect(() => {
+    if (userEditData) {
+      setUserData({
+        first_name: userEditData.first_name,
+        last_name: userEditData.last_name,
+        email: userEditData.email,
+        gender: userEditData.gender,
+        address: userEditData.address,
+      });
+    }
+  }, [userEditData]);
+
+  const updateUserMutation = useMutation({
+    // mutationFn: UpdateUser(),
+    mutationFn: () => UpdateUser({ ...userData }, editUserId),
+    onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
-      setData({
+      setUserData({
         first_name: "",
         last_name: "",
         email: "",
         gender: "",
         address: "",
-        password: "",
       });
-      toggleShowUserForm(!showAddUserForm);
-      console.log("success bro!");
+
+      toast.success(data?.message);
+      setShowEditModal(!showEditUserModal);
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message);
     },
   });
 
-  const HandleSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (
-      userData.first_name.trim() === "" ||
-      userData.last_name.trim() === "" ||
-      userData.email.trim() === "" ||
-      userData.gender.trim() === "" ||
-      userData.address.trim() === "" ||
-      userData.password.trim() === ""
-    ) {
-      return toast.error("All field must be filled up.");
-    }
 
-    await userMutation.mutate({ ...userData });
+    updateUserMutation.mutate();
   };
 
   return (
     <>
       <section
         className={`${
-          showAddUserForm ? "block" : "hidden"
-        } h-screen w-screen  bg-black/75 bg-opacity-95 flex items-center justify-center absolute z-20`}
+          showEditUserModal ? "flex" : "hidden"
+        } h-screen w-screen  bg-black/75 bg-opacity-95 items-center justify-center absolute z-20`}
       >
-        <form className="h-max w-5/6 border border-gray-900/10 shadow-md rounded bg-white  p-4">
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          className="h-max w-5/6 border border-gray-900/10 shadow-md rounded bg-white  p-4"
+        >
           <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Personal Information
+            Edit Personal Information
           </h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">
             Use a permanent address where you can receive mail.
@@ -99,7 +102,10 @@ export default function AddNewUser() {
                   value={userData.first_name}
                   placeholder="Enter your first name"
                   onChange={(e) =>
-                    setData({ ...userData, [e.target.name]: e.target.value })
+                    setUserData({
+                      ...userData,
+                      [e.target.name]: e.target.value,
+                    })
                   }
                 />
               </div>
@@ -120,7 +126,10 @@ export default function AddNewUser() {
                   value={userData.last_name}
                   placeholder="Enter your last name"
                   onChange={(e) =>
-                    setData({ ...userData, [e.target.name]: e.target.value })
+                    setUserData({
+                      ...userData,
+                      [e.target.name]: e.target.value,
+                    })
                   }
                 />
               </div>
@@ -181,7 +190,10 @@ export default function AddNewUser() {
                   value={userData.email}
                   placeholder="Enter your email"
                   onChange={(e) =>
-                    setData({ ...userData, email: e.target.value })
+                    setUserData({
+                      ...userData,
+                      [e.target.name]: e.target.value,
+                    })
                   }
                 />
               </div>
@@ -196,7 +208,8 @@ export default function AddNewUser() {
               </label>
               <div className="mt-2">
                 <Select
-                  onValueChange={(e) => setData({ ...userData, gender: e })}
+                  value={userData.gender}
+                  onValueChange={(e) => setUserData({ ...userData, gender: e })}
                 >
                   <SelectTrigger name="gender" className="text-center bg-white">
                     <SelectValue placeholder="Select your gender" />
@@ -237,29 +250,10 @@ export default function AddNewUser() {
                   value={userData.address}
                   placeholder="Enter your address"
                   onChange={(e) =>
-                    setData({ ...userData, [e.target.name]: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-
-            {/*  */}
-            <div className="col-span-full">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
-              <div className="mt-2">
-                <Input
-                  type="password"
-                  name="password"
-                  required
-                  value={userData.password}
-                  placeholder="Enter your password"
-                  onChange={(e) =>
-                    setData({ ...userData, [e.target.name]: e.target.value })
+                    setUserData({
+                      ...userData,
+                      [e.target.name]: e.target.value,
+                    })
                   }
                 />
               </div>
@@ -270,24 +264,15 @@ export default function AddNewUser() {
           <div className=" flex justify-end space-x-4 mt-8">
             <Button
               type="button"
-              onClick={() => {
-                toggleShowUserForm(!showAddUserForm);
-                setData({
-                  first_name: "",
-                  last_name: "",
-                  email: "",
-                  gender: "",
-                  address: "",
-                  password: "",
-                });
-              }}
+              disabled={updateUserMutation?.isLoading}
+              onClick={() => setShowEditModal(!showEditUserModal)}
               className="bg-red-500 hover:bg-red-600"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              onClick={(e) => HandleSubmit(e)}
+              disabled={updateUserMutation?.isLoading}
               className="bg-blue-500 hover:bg-blue-600"
             >
               Save

@@ -2,7 +2,7 @@ import Image from "next/image";
 import peoples from "../../assets/people-cofee.svg";
 import bg from "../../assets/bg-login.jpg";
 import blob from "../../assets/login-form-blob.png";
-import LoginForm from "@/components/login-form/Login-Form";
+import LoginForm from "./Login-Form";
 import { getServerSession } from "next-auth/next";
 import { options } from "../api/auth/[...nextauth]/options";
 

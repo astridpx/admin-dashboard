@@ -18,7 +18,9 @@ export default async function ProductsPage() {
   return (
     <>
       <PageWrapper>
-        <DataTable columns={productColumns} data={prodData} />
+        <div className="relative ">
+          <DataTable columns={productColumns} data={prodData} />
+        </div>
       </PageWrapper>
     </>
   );

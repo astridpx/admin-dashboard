@@ -25,13 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <ReactQueryProvider>
-          <body className={poppins.className}>
+        <body className={poppins.className}>
+          <ReactQueryProvider>
             {children}
             {/* <Toaster /> */}
             <Toaster position="bottom-right" reverseOrder={false} />
-          </body>
-        </ReactQueryProvider>
+          </ReactQueryProvider>
+        </body>
       </AuthProvider>
     </html>
   );

@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useQuery } from "react-query";
 import { getUser } from "./APIs/api";
 import Loader from "@/components/loader/Spinner";
+import EditUserModal from "./Edit-User-Modal";
 
 export default function UsersPage() {
   const { toggleShowUserForm, showAddUserForm } = addUserModalStore();
@@ -27,6 +28,8 @@ export default function UsersPage() {
   return (
     <>
       <AddNewUserModal />
+      <EditUserModal />
+
       <PageWrapper>
         <div className="relative ">
           <div className="flex justify-end ">
