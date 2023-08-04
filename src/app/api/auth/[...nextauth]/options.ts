@@ -3,6 +3,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { ILogin } from "../../../../../typings";
 
 export const options: NextAuthOptions = {
+  session: {
+    strategy: "jwt",
+    maxAge: 10 * 60 * 60,
+  },
+
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -41,7 +46,7 @@ export const options: NextAuthOptions = {
 
         // If no error and we have user data, return it
         if (res?.ok && user?.isAuth) {
-          return user;
+          return user?.user;
         } else throw new Error(user?.message);
 
         // This is where you need to retrieve user data
@@ -64,5 +69,18 @@ export const options: NextAuthOptions = {
   ],
   pages: {
     signIn: "/Login",
+  },
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.role = user.role;
+
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (session.user) session.user.role = token.role;
+      return session;
+    },
   },
 };

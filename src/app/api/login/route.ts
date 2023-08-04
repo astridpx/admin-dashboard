@@ -23,7 +23,11 @@ export async function POST(req: Request) {
         { status: 400 }
       );
 
-    return NextResponse.json({ message: "Login Successfull", isAuth: true });
+    return NextResponse.json({
+      message: "Login Successfull",
+      isAuth: true,
+      user,
+    });
   } catch (error) {
     console.log(error);
 
