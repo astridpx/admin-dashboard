@@ -51,6 +51,9 @@ export function DataTableRowActions<TData>({
 
   const deleteUserMutation = useMutation({
     mutationFn: () => DeleteUser(userId),
+    onMutate: () => {
+      notify();
+    },
     onSuccess: async (data: any) => {
       await queryClient.invalidateQueries({ queryKey: ["users"] });
       toast.dismiss();
@@ -62,10 +65,6 @@ export function DataTableRowActions<TData>({
       toast.error(error?.response?.data?.message);
     },
   });
-
-  if (deleteUserMutation.isLoading) {
-    notify();
-  }
 
   const handleSubmit = async (e: any) => {
     deleteUserMutation.mutate();
