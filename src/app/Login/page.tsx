@@ -5,10 +5,22 @@ import blob from "../../assets/login-form-blob.png";
 import LoginForm from "./Login-Form";
 import { getServerSession } from "next-auth/next";
 import { options } from "../api/auth/[...nextauth]/options";
+import Link from "next/link";
 
 export default async function LoginPage() {
   const session = await getServerSession(options);
-  console.log(session);
+
+  if (session) {
+    return (
+      <>
+        <div className="flex justify-center pt-12 h-screen  w-full">
+          <Link href="/" className="text-center text-blue-400 underline">
+            Back to Home
+          </Link>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
