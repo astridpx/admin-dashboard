@@ -38,7 +38,7 @@ export default function Sidebar() {
                 <>
                   <h1
                     key={items.key}
-                    className={`text-base text-gray-500 ml-3 my-2  ${
+                    className={`text-base text-orange-500 ml-3 my-2  ${
                       !isExpand && "hidden"
                     }`}
                   >
@@ -52,7 +52,7 @@ export default function Sidebar() {
                         <Link
                           key={list.id}
                           href={list.path}
-                          className="flex items-center px-3 py-3 cursor-pointer rounded hover:bg-slate-200"
+                          className="flex items-center px-3 py-3 cursor-pointer rounded hover:bg-orange-100"
                         >
                           {React.createElement(list.icon, {
                             size: 22,

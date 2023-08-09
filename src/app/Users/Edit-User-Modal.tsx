@@ -263,17 +263,18 @@ export default function EditUserModal() {
           {/* BUTTON FOOTER */}
           <div className=" flex justify-end space-x-4 mt-8">
             <Button
+              variant="outline"
               type="button"
               disabled={updateUserMutation?.isLoading}
               onClick={() => setShowEditModal(!showEditUserModal)}
-              className="bg-red-500 hover:bg-red-600"
+              // className="bg-red-500 hover:bg-red-600"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={updateUserMutation?.isLoading}
-              className="bg-blue-500 hover:bg-blue-600"
+              // className="bg-blue-500 hover:bg-blue-600"
             >
               Save
             </Button>

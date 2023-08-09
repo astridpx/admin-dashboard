@@ -42,17 +42,20 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <Badge variant="secondary" className="rounded-3xl">
+          <Badge
+            // variant="secondary"
+            className="rounded-3xl"
+          >
             {darkMode ? (
               <BiSun
                 size={23}
-                className="text-gray-500 cursor-pointer"
+                className=" cursor-pointer"
                 onClick={() => setDarkMode(!darkMode)}
               />
             ) : (
               <BiMoon
                 size={23}
-                className="text-gray-500 cursor-pointer"
+                className=" cursor-pointer"
                 onClick={() => setDarkMode(!darkMode)}
               />
             )}
@@ -61,10 +64,13 @@ export default function Navbar() {
           <div>
             <DropdownMenu>
               <DropdownMenuTrigger className="focus:outline-0 focus:outline-none">
-                <Badge variant="secondary" className="rounded-3xl">
+                <Badge
+                  // variant="secondary"
+                  className="rounded-3xl"
+                >
                   <IoMdNotificationsOutline
                     size={23}
-                    className="text-gray-500 cursor-pointer"
+                    className=" cursor-pointer"
                   />
                 </Badge>
               </DropdownMenuTrigger>

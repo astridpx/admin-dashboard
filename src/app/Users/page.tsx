@@ -35,7 +35,7 @@ export default function UsersPage() {
           <div className="flex justify-end ">
             <Button
               onClick={() => toggleShowUserForm(!showAddUserForm)}
-              className="bg-blue-600 hover:bg-blue-700"
+              // className="bg-blue-600 hover:bg-blue-700"
             >
               Add New
             </Button>
