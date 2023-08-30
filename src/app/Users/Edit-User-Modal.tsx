@@ -73,11 +73,11 @@ export default function EditUserModal() {
       <section
         className={`${
           showEditUserModal ? "flex" : "hidden"
-        } h-screen w-screen  bg-black/75 bg-opacity-95 items-center justify-center absolute z-20`}
+        } h-screen w-screen  bg-black/75 bg-opacity-95 items-center justify-center absolute z-20 `}
       >
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className="h-max w-5/6 border border-gray-900/10 shadow-md rounded bg-white  p-4"
+          className="h-max w-5/6 border border-gray-900/10 shadow-md rounded bg-white p-4 dark:bg-dark_bg"
         >
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Edit Personal Information
@@ -211,7 +211,7 @@ export default function EditUserModal() {
                   value={userData.gender}
                   onValueChange={(e) => setUserData({ ...userData, gender: e })}
                 >
-                  <SelectTrigger name="gender" className="text-center bg-white">
+                  <SelectTrigger name="gender" className="text-center ">
                     <SelectValue placeholder="Select your gender" />
                   </SelectTrigger>
                   <SelectContent>

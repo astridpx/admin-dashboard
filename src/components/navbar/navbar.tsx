@@ -20,6 +20,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { signOut } from "next-auth/react";
 import useSidebarStore from "@/lib/zustand/sidebar-store/sidebar-store";
+import { useTheme } from "next-themes";
 
 const tags = Array.from({ length: 50 }).map(
   (_, i, a) => `v1.2.0-beta.${a.length - i}`
@@ -28,38 +29,36 @@ const tags = Array.from({ length: 50 }).map(
 export default function Navbar() {
   const { toggleSidebar, isExpand } = useSidebarStore();
   const [darkMode, setDarkMode] = useState<boolean>(false);
+  const { theme, setTheme } = useTheme();
 
   return (
     <>
-      <nav className="h-[10vh] w-full px-4 bg-white flex justify-between z-10 sticky top-0 border-b border-gray-200 ">
+      <nav className="h-[10vh] w-full px-4 bg-white flex justify-between z-10 sticky top-0 border-b border-gray-200 dark:border-gray-400 dark:bg-dark_bg">
         <div className="flex items-center">
           <Toggle onClick={() => toggleSidebar(!isExpand)}>
             <HiOutlineMenuAlt2
               size={26}
-              className="cursor-pointer text-gray-500"
+              className="cursor-pointer text-gray-500  dark:text-gray-300"
             />
           </Toggle>
         </div>
 
         <div className="flex items-center space-x-4">
-          <Badge
-            // variant="secondary"
-            className="rounded-3xl"
-          >
-            {darkMode ? (
-              <BiSun
-                size={23}
-                className=" cursor-pointer"
-                onClick={() => setDarkMode(!darkMode)}
-              />
-            ) : (
-              <BiMoon
-                size={23}
-                className=" cursor-pointer"
-                onClick={() => setDarkMode(!darkMode)}
-              />
-            )}
-          </Badge>
+          {theme === "dark" ? (
+            <Badge
+              className="rounded-3xl cursor-pointer"
+              onClick={() => setTheme("light")}
+            >
+              <BiSun size={23} />
+            </Badge>
+          ) : (
+            <Badge
+              className="rounded-3xl cursor-pointer"
+              onClick={() => setTheme("dark")}
+            >
+              <BiMoon size={23} />
+            </Badge>
+          )}
 
           <div>
             <DropdownMenu>
@@ -103,8 +102,12 @@ export default function Navbar() {
             <DropdownMenuTrigger className="focus:outline-0 focus:outline-none">
               <div className="h-[10vh] flex items-center px-2 space-x-4 focus:outline-0 focus:outline-none border-none cursor-pointer">
                 <div className="flex flex-col justify-end text-right leading-6 ">
-                  <h1 className="text-gray-700">Joe Biden</h1>
-                  <p className="text-xs text-gray-600">Admin</p>
+                  <h1 className="text-gray-700 dark:text-gray-300">
+                    Joe Biden
+                  </h1>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    Admin
+                  </p>
                 </div>
 
                 <div className="flex items-center space-x-4">

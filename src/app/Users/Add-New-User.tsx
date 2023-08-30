@@ -73,9 +73,9 @@ export default function AddNewUser() {
       <section
         className={`${
           showAddUserForm ? "block" : "hidden"
-        } h-screen w-screen  bg-black/75 bg-opacity-95 flex items-center justify-center absolute z-20`}
+        } h-screen w-screen  bg-black/75 bg-opacity-95 flex items-center justify-center absolute z-20 `}
       >
-        <form className="h-max w-5/6 border border-gray-900/10 shadow-md rounded bg-white  p-4">
+        <form className="h-max w-5/6 border border-gray-900/10 shadow-md rounded bg-white p-4 dark:bg-dark_bg">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Personal Information
           </h2>
@@ -198,7 +198,7 @@ export default function AddNewUser() {
                 <Select
                   onValueChange={(e) => setData({ ...userData, gender: e })}
                 >
-                  <SelectTrigger name="gender" className="text-center bg-white">
+                  <SelectTrigger name="gender" className="text-center ">
                     <SelectValue placeholder="Select your gender" />
                   </SelectTrigger>
                   <SelectContent>

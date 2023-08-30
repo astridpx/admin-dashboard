@@ -11,8 +11,10 @@ import { useQuery } from "react-query";
 import { getUser } from "./APIs/api";
 import Loader from "@/components/loader/Spinner";
 import EditUserModal from "./Edit-User-Modal";
+import { useTheme } from "next-themes";
 
 export default function UsersPage() {
+  const { theme } = useTheme();
   const { toggleShowUserForm, showAddUserForm } = addUserModalStore();
   const {
     isLoading,
@@ -35,7 +37,7 @@ export default function UsersPage() {
           <div className="flex justify-end ">
             <Button
               onClick={() => toggleShowUserForm(!showAddUserForm)}
-              // className="bg-blue-600 hover:bg-blue-700"
+              className="dark:border dark:border-blue-400 dark:bg-transparent dark:text-blue-400"
             >
               Add New
             </Button>

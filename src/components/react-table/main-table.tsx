@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
             className="h-8 w-[150px] lg:w-[250px]"
           />
         </div>
-        <Table>
+        <Table className="dark:text-dark_text">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

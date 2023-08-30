@@ -12,7 +12,9 @@ export default function PageWrapper({
         <Sidebar />
         <section className="h-full w-full   overflow-y-auto ">
           <Navbar />
-          <div className="h-max  border-gray-200 border-t p-4">{children}</div>
+          <div className="h-max  border-gray-200 border-t p-4 dark:bg-dark_bg">
+            {children}
+          </div>
         </section>
       </main>
     </>
