@@ -7,5 +7,5 @@ export default function ThemeProviderWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  return <ThemeProvider attribute="class">{children}</ThemeProvider>;
+  return <ThemeProvider enableSystem={false} attribute="class">{children}</ThemeProvider>;
 }
