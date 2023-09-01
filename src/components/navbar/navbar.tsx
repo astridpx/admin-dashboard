@@ -28,7 +28,6 @@ const tags = Array.from({ length: 50 }).map(
 
 export default function Navbar() {
   const { toggleSidebar, isExpand } = useSidebarStore();
-  const [darkMode, setDarkMode] = useState<boolean>(false);
   const { theme, setTheme } = useTheme();
 
   return (
@@ -65,28 +64,41 @@ export default function Navbar() {
               <DropdownMenuTrigger className="focus:outline-0 focus:outline-none">
                 <Badge
                   // variant="secondary"
-                  className="rounded-3xl"
+                  className="rounded-3xl relative"
                 >
                   <IoMdNotificationsOutline
                     size={23}
-                    className=" cursor-pointer"
+                    className="relative cursor-pointer"
                   />
+                  <span className="px-1 absolute z-10  text-[10px] bg-red-400 rounded-full -top-1 right-1">
+                    10
+                  </span>
                 </Badge>
               </DropdownMenuTrigger>
 
               {/* NOTIFICATION DROPDOWN */}
-              <DropdownMenuContent className="h-72 w-56" align="end" forceMount>
-                <DropdownMenuLabel className="py-4">
-                  <h4 className="text-sm font-medium leading-none">
+              <DropdownMenuContent
+                className="h-96 w-72 "
+                align="end"
+                forceMount
+              >
+                <DropdownMenuLabel className="py-4 sticky top-0 w-full flex justify-between  ">
+                  <h4 className="text-base font-medium leading-none">
                     Notifications
                   </h4>
+                  <p className="text-xs bg-sky-100 text-sky-500 dark:bg-[#1B2C32]  px-2 py-1 rounded-full">
+                    10 Unread
+                  </p>
                 </DropdownMenuLabel>
                 <Separator />
-                <ScrollArea className="h-full w-full">
-                  <div className="px-4">
+                <ScrollArea className="h-80  w-full">
+                  <div className="pb-1">
                     {tags.map((tag) => (
                       <>
-                        <div className="text-sm py-3 text-gray-600 " key={tag}>
+                        <div
+                          className="px-4 text-sm py-3 text-gray-600 "
+                          key={tag}
+                        >
                           {tag}
                         </div>
                         <Separator />
